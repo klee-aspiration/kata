@@ -30,7 +30,7 @@ func init() {
 func serverCmdRunner() {
 	mux := http.NewServeMux()
 	rootHandler := http.HandlerFunc(rootHandler)
-	sharedMiddlewares := alice.New(middlewares.LogRequest)
+	sharedMiddlewares := alice.New(middlewares.LogRequest, middlewares.EnforceContentType)
 	mux.Handle("/", sharedMiddlewares.Then(rootHandler))
 	logrus.Info(fmt.Sprintf("kata server running on %v",
 		config.Constants["SERVER_PORT"]))
