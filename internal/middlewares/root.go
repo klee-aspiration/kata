@@ -23,6 +23,14 @@ func EnforceAPIKataRequestContentType(next http.Handler) http.Handler {
 	})
 }
 
+func AddAPIResponseContentType(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type",
+			fmt.Sprintf("%v", config.Constants["REQUIRED_API_KATA_REQUEST_CONTENT_TYPE"]))
+		next.ServeHTTP(w, r)
+	})
+}
+
 func LogRequest(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(fmt.Sprintf(
