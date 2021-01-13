@@ -15,8 +15,10 @@ var (
 		"DATABASE_URL",
 		"SERVER_PORT",
 	}
-	Constants = map[string]interface{}{}
-	DB        *sql.DB
+	Constants = map[string]interface{}{
+		"REQUIRED_API_KATA_REQUEST_CONTENT_TYPE": "application/api.kata-json",
+	}
+	DB *sql.DB
 )
 
 func init() {
