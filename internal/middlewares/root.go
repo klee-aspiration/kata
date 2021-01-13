@@ -32,3 +32,11 @@ func LogRequest(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func SetContentType(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		contentTypeToSet := fmt.Sprintf("%v", config.Constants["REQUIRED_API_KATA_RESPONSE_CONTENT_TYPE"])
+		w.Header().Set("Content-Type", contentTypeToSet)
+		next.ServeHTTP(w, r)
+	})
+}
